@@ -16,6 +16,7 @@ This repository contains everything required to run the app locally: the fronten
 - Persistent user profiles stored in SQLite (created under `backend/instance/`).
 - Offline-capable market insights (cached JSON) used to enrich role metadata.
 - Modern responsive frontend using Tailwind, Chart.js and React.
+- Verified local backend startup using Python module mode and current artifacts loaded from `backend/ml/artifacts`.
 
 ## 🛠️ Tech Stack
 
@@ -64,9 +65,13 @@ Trained artifacts are stored under `model_artifacts/` and `instance/ml/artifacts
 
 ```bash
 # from repo root
-python backend/run.py
+python -m backend.run
 # The backend starts on http://127.0.0.1:5000 and exposes the API under /api
 ```
+
+If you run `python backend/run.py` from the repo root, Python may not resolve the `backend` package imports correctly, so module mode is the recommended launch method.
+
+The running backend has been verified to return role metadata from `GET http://127.0.0.1:5000/api/roles`.
 
 You can optionally set environment variables to override defaults (see `backend/config.py`):
 
